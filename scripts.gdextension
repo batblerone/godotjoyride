@@ -1,0 +1,14 @@
+[configuration]
+entry_symbol = "gdext_rust_init"
+compatibility_minimum = 4.5
+reloadable = true
+
+[libraries]
+linux.debug.x86_64 =     "res://scripts/target/debug/libscripts.so"
+linux.release.x86_64 =   "res://scripts/target/release/libscripts.so"
+windows.debug.x86_64 =   "res://scripts/target/debug/libscripts.dll"
+windows.release.x86_64 = "res://scripts/target/release/libscripts.dll"
+macos.debug =            "res://scripts/target/debug/libscripts.dylib"
+macos.release =          "res://scripts/target/release/libscripts.dylib"
+macos.debug.arm64 =      "res://scripts/target/debug/libscripts.dylib"
+macos.release.arm64 =    "res://scripts/target/release/libscripts.dylib"

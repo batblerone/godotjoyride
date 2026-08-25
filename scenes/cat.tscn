@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://dwiqa5abig5s4"]
+
+[ext_resource type="Texture2D" uid="uid://beshs6dlcqix7" path="res://assets/yellow_0.png" id="1_myi5k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_se5fe"]
+atlas = ExtResource("1_myi5k")
+region = Rect2(640, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8pth"]
+atlas = ExtResource("1_myi5k")
+region = Rect2(672, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7vi38"]
+atlas = ExtResource("1_myi5k")
+region = Rect2(704, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxap7"]
+atlas = ExtResource("1_myi5k")
+region = Rect2(736, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tol8a"]
+atlas = ExtResource("1_myi5k")
+region = Rect2(640, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o55mh"]
+atlas = ExtResource("1_myi5k")
+region = Rect2(672, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ic5u8"]
+atlas = ExtResource("1_myi5k")
+region = Rect2(704, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8px16"]
+atlas = ExtResource("1_myi5k")
+region = Rect2(736, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_slkoe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_se5fe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8pth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7vi38")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxap7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tol8a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o55mh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ic5u8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8px16")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_slkoe"]
+radius = 16.0
+
+[node name="Cat" type="CharacterBody2D" unique_id=1473036286]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=123174299]
+sprite_frames = SubResource("SpriteFrames_slkoe")
+animation = &"idle"
+frame_progress = 0.8169447
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1231535912]
+shape = SubResource("CircleShape2D_slkoe")

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://80r75qpa75ne"]
 
-[ext_resource type="Texture2D" uid="uid://g1wsjdhhc3ub" path="res://assets/Parallax bosque.png" id="1_uwrxv"]
-[ext_resource type="PackedScene" uid="uid://b53j5nluqljly" path="res://assets/decimator.tscn" id="2_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://g1wsjdhhc3ub" path="res://assets/sprites/Parallax bosque.png" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://b53j5nluqljly" path="res://scenes/decimator.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://dgkpak7tgfm4o" path="res://scenes/player.tscn" id="3_lnu2h"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
@@ -38,4 +38,3 @@ position = Vector2(-592, 0)
 
 [node name="Player" parent="." unique_id=207546028 instance=ExtResource("3_lnu2h")]
 position = Vector2(-384, 256)
-scale = Vector2(3, 3)

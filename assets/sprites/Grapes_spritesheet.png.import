@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1ucoso4jgit8"
-path="res://.godot/imported/crow_fall_strip2.png-89715684d4ebde1476124290206c9561.ctex"
+uid="uid://byluasg852cij"
+path="res://.godot/imported/Grapes_spritesheet.png-653c8c737101e910ea3e7383ce80916c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/crow_fall_strip2.png"
-dest_files=["res://.godot/imported/crow_fall_strip2.png-89715684d4ebde1476124290206c9561.ctex"]
+source_file="res://assets/sprites/Grapes_spritesheet.png"
+dest_files=["res://.godot/imported/Grapes_spritesheet.png-653c8c737101e910ea3e7383ce80916c.ctex"]
 
 [params]
 

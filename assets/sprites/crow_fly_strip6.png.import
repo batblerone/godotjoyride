@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://g1wsjdhhc3ub"
-path="res://.godot/imported/Parallax bosque.png-96431170036f876ab4f7502e4f0ce6ea.ctex"
+uid="uid://imbpt00kh7jl"
+path="res://.godot/imported/crow_fly_strip6.png-67616776e04bb8f6464a5cfa3f251da0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Parallax bosque.png"
-dest_files=["res://.godot/imported/Parallax bosque.png-96431170036f876ab4f7502e4f0ce6ea.ctex"]
+source_file="res://assets/sprites/crow_fly_strip6.png"
+dest_files=["res://.godot/imported/crow_fly_strip6.png-67616776e04bb8f6464a5cfa3f251da0.ctex"]
 
 [params]
 

@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dicg16tva3lfo"]
+
+[node name="ObstacleSpawn" type="Node2D" unique_id=746215169]
+
+[node name="Timer" type="Timer" parent="." unique_id=1812566517]

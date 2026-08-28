@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://dqaugckj6pcg4"]
+
+[ext_resource type="Texture2D" uid="uid://byluasg852cij" path="res://assets/sprites/Grapes_spritesheet.png" id="1_422x0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_slkoe"]
+radius = 8.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elxb2"]
+atlas = ExtResource("1_422x0")
+region = Rect2(0, 0, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e47g1"]
+atlas = ExtResource("1_422x0")
+region = Rect2(16, 0, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkn8g"]
+atlas = ExtResource("1_422x0")
+region = Rect2(32, 0, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsuis"]
+atlas = ExtResource("1_422x0")
+region = Rect2(48, 0, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uw7nk"]
+atlas = ExtResource("1_422x0")
+region = Rect2(64, 0, 15, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_slkoe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elxb2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e47g1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkn8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsuis")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uw7nk")
+}],
+"loop": 2,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="Grapes" type="Area2D" unique_id=1873527977]
+scale = Vector2(3, 3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=262354490]
+shape = SubResource("CircleShape2D_slkoe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=894861300]
+sprite_frames = SubResource("SpriteFrames_slkoe")

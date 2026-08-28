@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://byujh8ndp0hek"]
+
+[ext_resource type="Texture2D" uid="uid://g4b2qrix5omo" path="res://assets/sprites/Bush 009 010 (16x1.png" id="1_ar2yf"]
+[ext_resource type="Texture2D" uid="uid://bjwmleps6unxu" path="res://assets/sprites/Branch.png" id="2_efscc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_df2p5"]
+size = Vector2(79, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_slkoe"]
+size = Vector2(59, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ajmy"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_anp1u"]
+resource_local_to_scene = true
+atlas = ExtResource("1_ar2yf")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_anp1u"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slkoe"]
+atlas = ExtResource("1_ar2yf")
+region = Rect2(16, 0, 16, 16)
+
+[node name="TreeBranch" type="Area2D" unique_id=1510409778 groups=["Obstacles"]]
+scale = Vector2(4, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2103058457]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_df2p5")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2091712079]
+position = Vector2(0, 1)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1466640083]
+position = Vector2(2.5, 0.5)
+shape = SubResource("RectangleShape2D_slkoe")
+
+[node name="Line2D" type="Sprite2D" parent="Area2D" unique_id=252882129]
+position = Vector2(2.499998, 1.7881393e-07)
+scale = Vector2(0.46093747, 0.28125)
+texture = ExtResource("2_efscc")
+
+[node name="Branch1" type="Area2D" parent="." unique_id=2095144181]
+position = Vector2(-31, 0)
+rotation = -1.5707964
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Branch1" unique_id=385934158]
+shape = SubResource("RectangleShape2D_0ajmy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Branch1" unique_id=459234127]
+texture = SubResource("AtlasTexture_anp1u")
+
+[node name="Branch2" type="Area2D" parent="." unique_id=1288423892]
+position = Vector2(32, 1)
+rotation = 1.5707964
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Branch2" unique_id=914242807]
+shape = SubResource("RectangleShape2D_anp1u")
+
+[node name="Sprite2D" type="Sprite2D" parent="Branch2" unique_id=1071364498]
+texture = SubResource("AtlasTexture_slkoe")

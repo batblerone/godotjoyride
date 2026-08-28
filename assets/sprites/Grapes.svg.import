@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv8p1dmfgy67i"
-path="res://.godot/imported/crow_die_strip16.png-d1109fd84ddb8c8688593ed31dbe95ee.ctex"
+uid="uid://ca0yiqjp4i34m"
+path="res://.godot/imported/Grapes.svg-62b9d8f6cd9b0f779060fce3d6bfe715.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/crow_die_strip16.png"
-dest_files=["res://.godot/imported/crow_die_strip16.png-d1109fd84ddb8c8688593ed31dbe95ee.ctex"]
+source_file="res://assets/sprites/Grapes.svg"
+dest_files=["res://.godot/imported/Grapes.svg-62b9d8f6cd9b0f779060fce3d6bfe715.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

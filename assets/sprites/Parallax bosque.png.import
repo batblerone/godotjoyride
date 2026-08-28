@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dr82b0xc8dpi0"
-path="res://.godot/imported/crow_walk_strip16.png-14aa81453b2d0fdccfa3a4eb5f41e9e4.ctex"
+uid="uid://g1wsjdhhc3ub"
+path="res://.godot/imported/Parallax bosque.png-3c193322a3e527d1b7a61a5052ec0563.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/crow_walk_strip16.png"
-dest_files=["res://.godot/imported/crow_walk_strip16.png-14aa81453b2d0fdccfa3a4eb5f41e9e4.ctex"]
+source_file="res://assets/sprites/Parallax bosque.png"
+dest_files=["res://.godot/imported/Parallax bosque.png-3c193322a3e527d1b7a61a5052ec0563.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://imbpt00kh7jl"
-path="res://.godot/imported/crow_fly_strip6.png-2024117480d13c349c7bb0b143127b3a.ctex"
+uid="uid://dv8p1dmfgy67i"
+path="res://.godot/imported/crow_die_strip16.png-aeee22088b57bbe8d306ff830f6abac2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/crow_fly_strip6.png"
-dest_files=["res://.godot/imported/crow_fly_strip6.png-2024117480d13c349c7bb0b143127b3a.ctex"]
+source_file="res://assets/sprites/crow_die_strip16.png"
+dest_files=["res://.godot/imported/crow_die_strip16.png-aeee22088b57bbe8d306ff830f6abac2.ctex"]
 
 [params]
 

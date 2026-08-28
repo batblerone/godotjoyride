@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://beshs6dlcqix7"
-path="res://.godot/imported/yellow_0.png-1767eefa171b8d02e1be7ffaba6e27a2.ctex"
+uid="uid://cf5ftqlbamwh1"
+path="res://.godot/imported/Horned Owl.png-c9009aaf0c989626ca59b90fcc874700.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/yellow_0.png"
-dest_files=["res://.godot/imported/yellow_0.png-1767eefa171b8d02e1be7ffaba6e27a2.ctex"]
+source_file="res://assets/sprites/Horned Owl.png"
+dest_files=["res://.godot/imported/Horned Owl.png-c9009aaf0c989626ca59b90fcc874700.ctex"]
 
 [params]
 

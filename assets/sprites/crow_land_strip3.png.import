@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cd5eo3il5pkqj"
-path="res://.godot/imported/crow_land_strip3.png-7c6e9c12c2cd0fbb56a08d7314fd6082.ctex"
+path="res://.godot/imported/crow_land_strip3.png-1f644290a963e0e064005f8e084227be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/crow_land_strip3.png"
-dest_files=["res://.godot/imported/crow_land_strip3.png-7c6e9c12c2cd0fbb56a08d7314fd6082.ctex"]
+source_file="res://assets/sprites/crow_land_strip3.png"
+dest_files=["res://.godot/imported/crow_land_strip3.png-1f644290a963e0e064005f8e084227be.ctex"]
 
 [params]
 

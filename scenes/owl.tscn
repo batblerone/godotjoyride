@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dwiqa5abig5s4"]
+
+[ext_resource type="SpriteFrames" uid="uid://cd8n6hhr7o33v" path="res://assets/sprite_frames/owl_animation.tres" id="1_a0qig"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_slkoe"]
+radius = 8.0
+
+[node name="HornedOwl" type="CharacterBody2D" unique_id=1473036286]
+scale = Vector2(4, 4)
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=123174299]
+position = Vector2(2, -2)
+sprite_frames = ExtResource("1_a0qig")
+animation = &"idle"
+frame_progress = 0.633726
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1231535912]
+shape = SubResource("CircleShape2D_slkoe")

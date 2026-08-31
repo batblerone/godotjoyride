@@ -1,0 +1,12 @@
+[package]
+name = "scripts"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+godot = { version= "0.5.5", features= ["experimental-godot-api", "serde"] }
+serde = "1.0.229"
+serde_json = "1.0.151"

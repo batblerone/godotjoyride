@@ -1,0 +1,163 @@
+[gd_scene format=3 uid="uid://b6346im3k2pjo"]
+
+[ext_resource type="Shader" uid="uid://bvtwqi1cctvqq" path="res://shader/menu_background.gdshader" id="1_vjb58"]
+[ext_resource type="Texture2D" uid="uid://g1wsjdhhc3ub" path="res://assets/sprites/Parallax bosque.png" id="2_con2f"]
+[ext_resource type="FontFile" uid="uid://dmmttscnqais5" path="res://assets/fonts/EBGaramond-VariableFont_wght.ttf" id="3_con2f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ekxnf"]
+shader = ExtResource("1_vjb58")
+shader_parameter/speed = 0.01
+
+[sub_resource type="LabelSettings" id="LabelSettings_slkoe"]
+font = ExtResource("3_con2f")
+font_size = 140
+
+[sub_resource type="Theme" id="Theme_slkoe"]
+Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 40
+Button/fonts/font = ExtResource("3_con2f")
+
+[sub_resource type="LabelSettings" id="LabelSettings_anp1u"]
+font = ExtResource("3_con2f")
+font_size = 100
+
+[node name="MenuControl" type="MenuLayer" unique_id=401258770]
+process_mode = 3
+
+[node name="Background" type="TextureRect" parent="." unique_id=1320489102]
+material = SubResource("ShaderMaterial_ekxnf")
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("2_con2f")
+stretch_mode = 1
+
+[node name="Label" type="Label" parent="." unique_id=772332693]
+offset_right = 1280.0
+offset_bottom = 256.0
+text = "Fly away!"
+label_settings = SubResource("LabelSettings_slkoe")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonContainer" type="CenterContainer" parent="." unique_id=530143379]
+offset_top = 256.0
+offset_right = 1288.0
+offset_bottom = 720.0
+theme = SubResource("Theme_slkoe")
+
+[node name="MainMenu" type="VBoxContainer" parent="ButtonContainer" unique_id=1996540765]
+custom_minimum_size = Vector2(353, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Play" type="Button" parent="ButtonContainer/MainMenu" unique_id=2085666806]
+layout_mode = 2
+text = "Play"
+
+[node name="Settings" type="Button" parent="ButtonContainer/MainMenu" unique_id=1363267842]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_con2f")
+theme_override_font_sizes/font_size = 40
+text = "Settings"
+
+[node name="Credits" type="Button" parent="ButtonContainer/MainMenu" unique_id=1538033680]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_con2f")
+theme_override_font_sizes/font_size = 40
+text = "Credits
+"
+
+[node name="Exit" type="Button" parent="ButtonContainer/MainMenu" unique_id=581577826]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_con2f")
+theme_override_font_sizes/font_size = 40
+text = "Exit
+"
+
+[node name="SettingsMenu" type="VBoxContainer" parent="ButtonContainer" unique_id=1227535535]
+visible = false
+custom_minimum_size = Vector2(353, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Fullscreen" type="CheckBox" parent="ButtonContainer/SettingsMenu" unique_id=707920273]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_con2f")
+theme_override_font_sizes/font_size = 40
+text = "Fullscreen"
+alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="ButtonContainer/SettingsMenu" unique_id=913066281]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 0.25
+tick_count = 10
+ticks_on_borders = true
+
+[node name="Label" type="Label" parent="ButtonContainer/SettingsMenu/VolumeSlider" unique_id=1632394447]
+layout_mode = 0
+offset_top = -16.0
+offset_right = 353.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("3_con2f")
+theme_override_font_sizes/font_size = 40
+text = "Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Back" type="Button" parent="ButtonContainer/SettingsMenu" unique_id=1001463576]
+custom_minimum_size = Vector2(353, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_con2f")
+theme_override_font_sizes/font_size = 40
+text = "Back
+
+"
+
+[node name="CreditsMenu" type="VBoxContainer" parent="ButtonContainer" unique_id=1745577863]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="ButtonContainer/CreditsMenu" unique_id=1543569]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+text = "A Game by Silly Crow Studios"
+label_settings = SubResource("LabelSettings_anp1u")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Back" type="Button" parent="ButtonContainer/CreditsMenu" unique_id=1680126726]
+custom_minimum_size = Vector2(353, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_con2f")
+theme_override_font_sizes/font_size = 40
+text = "Back
+
+"
+
+[connection signal="pressed" from="ButtonContainer/MainMenu/Play" to="." method="on_play_pressed"]
+[connection signal="pressed" from="ButtonContainer/MainMenu/Settings" to="." method="show_settings"]
+[connection signal="pressed" from="ButtonContainer/MainMenu/Credits" to="." method="show_credits"]
+[connection signal="pressed" from="ButtonContainer/MainMenu/Exit" to="." method="on_exit_pressed"]
+[connection signal="value_changed" from="ButtonContainer/SettingsMenu/VolumeSlider" to="." method="on_slider_changed"]
+[connection signal="pressed" from="ButtonContainer/SettingsMenu/Back" to="." method="show_main"]
+[connection signal="pressed" from="ButtonContainer/CreditsMenu/Back" to="." method="show_main"]

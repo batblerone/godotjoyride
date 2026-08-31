@@ -11,16 +11,21 @@ config_version=5
 [application]
 
 config/name="godotjoyride"
-run/main_scene="uid://80r75qpa75ne"
+run/main_scene="uid://b6346im3k2pjo"
 config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/show_image=false
 boot_splash/use_filter=false
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManagerGlobal="*uid://cmvg0bxnj21o5"
+
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 
 [dotnet]
 

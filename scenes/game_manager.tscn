@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cmvg0bxnj21o5"]
+
+[ext_resource type="AudioStream" uid="uid://cil7lgna0ionx" path="res://assets/Audio/Music/Enchanted_Woods.wav" id="1_glms7"]
+[ext_resource type="AudioStream" uid="uid://dq7j7a11yqc8j" path="res://assets/Audio/Music/Mystic_Forest.wav" id="2_udu3i"]
+
+[node name="GameManager" type="GameManager" unique_id=1285452315]
+
+[node name="GameMusic" type="AudioStreamPlayer2D" parent="." unique_id=35017054]
+stream = ExtResource("1_glms7")
+
+[node name="MenuMusic" type="AudioStreamPlayer2D" parent="." unique_id=429214794]
+stream = ExtResource("2_udu3i")

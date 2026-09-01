@@ -9,7 +9,7 @@ pub struct Player {
     #[export]
     acceleration: f32,
     animation_player: Option<Gd<AnimatedSprite2D>>, // Stores a reference to the animation node
-    is_dead: bool,
+    pub is_dead: bool,
     was_flying: bool,
 
     base: Base<CharacterBody2D>,

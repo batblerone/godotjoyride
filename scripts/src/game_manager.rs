@@ -1,7 +1,7 @@
 use godot::classes::file_access::ModeFlags;
 use godot::classes::node::ProcessMode;
 use godot::classes::ResourceLoader;
-use godot::classes::{AudioStreamPlayer2D, DirAccess, INode, Input, Node, TextureRect};
+use godot::classes::{AudioStreamPlayer2D, DirAccess, INode, Input, Label, Node, TextureRect};
 use godot::global::linear_to_db;
 use godot::prelude::*;
 use serde::{Deserialize, Serialize};
@@ -31,7 +31,7 @@ pub struct GameManager {
     save_dir: GString,
     float_score: f32,
     is_tracking_score: bool,
-    grapes: i32,
+    pub grapes: i32,
 
     // Audio particulars
     game_music: Option<Gd<AudioStreamPlayer2D>>,
@@ -128,6 +128,7 @@ impl INode for GameManager {
             let added_score = self.float_score.floor() as i32;
             self.current_score += added_score;
             self.float_score -= added_score as f32;
+            self.update_score_ui();
 
             if self.current_score > self.high_score {
                 self.high_score = self.current_score;
@@ -183,13 +184,14 @@ impl GameManager {
 
     fn pause_game(&mut self) {
         self.is_tracking_score = false;
+        self.play_menu_music();
 
-        // 1. Freeze game engine node processing
+        // Freeze game engine node processing
         if let Some(mut tree) = self.base().get_tree().into() {
             tree.set_pause(true);
         }
 
-        // 2. Load and instantiate the menu scene as an overlay
+        // Load and instantiate the menu scene as an overlay
         let mut loader = ResourceLoader::singleton();
         if let Some(res) = loader.load("res://scenes/main_menu.tscn") {
             if let Ok(packed_scene) = res.try_cast::<PackedScene>() {
@@ -216,17 +218,18 @@ impl GameManager {
     }
 
     fn resume_game(&mut self) {
-        // 1. Unfreeze engine node processing
+        // Unfreeze engine node processing
         if let Some(mut tree) = self.base().get_tree().into() {
             tree.set_pause(false);
         }
 
-        // 2. Remove menu overlay
+        // Remove menu overlay
         if let Some(mut overlay) = self.pause_menu_instance.take() {
             overlay.queue_free();
         }
 
         self.is_tracking_score = true;
+        self.play_game_music();
     }
 
     #[func]
@@ -257,6 +260,7 @@ impl GameManager {
     pub fn set_music_volume(&mut self, volume: f32) {
         self.music_volume = volume.clamp(0.0, 1.0);
         self.apply_volume();
+        self.save_game();
     }
 
     #[func]
@@ -285,6 +289,7 @@ impl GameManager {
                 menu_music.play();
             }
         }
+        self.apply_volume();
     }
 
     #[func]
@@ -298,6 +303,7 @@ impl GameManager {
                 game_music.play();
             }
         }
+        self.apply_volume();
     }
 
     #[func]
@@ -359,5 +365,38 @@ impl GameManager {
                 false
             }
         }
+    }
+
+    fn update_score_ui(&mut self) {
+        let Some(tree) = self.base().get_tree().into() else {
+            return;
+        };
+        let Some(current_scene) = tree.get_current_scene() else {
+            return;
+        };
+
+        // Now we query for the score label using relative paths to the game.tscn root
+        // Adjust the "HUD/Score" paths to match game.tscn.
+        if let Some(mut score_label) = current_scene.try_get_node_as::<Label>("HUD/Score") {
+            score_label.set_text(&self.current_score.to_string());
+        } else {
+            godot_warn!("Could not find 'Score' inside current scene.");
+        }
+
+        //Then adjust high score
+        if let Some(mut high_score_label) = current_scene.try_get_node_as::<Label>("HUD/HighScore")
+        {
+            high_score_label.set_text(&self.high_score.to_string());
+        }
+
+        if let Some(mut grapes_label) = current_scene.try_get_node_as::<Label>("HUD/Grapes") {
+            grapes_label.set_text(&self.grapes.to_string());
+        }
+    }
+
+    // adjust grape counts
+    pub fn add_grapes(&mut self, amount: i32) {
+        self.grapes += amount;
+        self.update_score_ui();
     }
 }

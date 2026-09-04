@@ -1,0 +1,53 @@
+{
+            if let Some(obstacle_instance) = packed_scene.instantiate() {
+                
+
+                // Handle specific setup based on type
+                match spawned_type {
+                    0 => {
+                        // Owl tracking player height
+                        if let Some(ref player) = self.player_node {
+                            spawn_position.y = player.get_position().y;
+                        }
+                    }
+                    1 | 2 => {
+                        // Cast directly to your custom TreeBranch Rust class type
+                        if let Ok(mut tree) = obstacle_instance.clone().try_cast::<TreeBranch>() {
+                            {
+                                let mut tree_struct = tree.bind_mut();
+                                if spawned_type == 2 {
+                                    tree_struct.is_rotating = true;
+                                }
+                            } // Tree struct droped here
+
+                            spawn_position.y =
+                                randf_range(-MAX_SPAWN_Y + 50.0, MAX_SPAWN_Y - 50.0) as f32;
+
+                            let random_initial_rotation =
+                                randf_range(0.0, std::f64::consts::TAU) as f32;
+                            tree.set_rotation(random_initial_rotation);
+                        }
+                    }
+                    _ => {}
+                }
+
+                // Upcast safely to Node2D to set the position and add to the scene tree
+                if let Ok(mut node2d_instance) = obstacle_instance.try_cast::<Node2D>() {
+                    node2d_instance.set_position(spawn_position);
+                    self.base_mut().add_child(&node2d_instance);
+                } else {
+                    godot_error!("Instantiated scene root does not inherit from Node2D!");
+                }
+
+                // Reset our timer
+                if let Some(mut timer) = self.timer.clone() {
+                    let random_spawn = randf_range(0.5, self.spawn_interval);
+                    timer.set_wait_time(random_spawn);
+                }
+            }
+        } else {
+            godot_error!(
+                "Failed to fetch a valid scene at index {}",
+                target_scene_index
+            );
+        }

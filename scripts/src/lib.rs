@@ -5,6 +5,7 @@ mod decimator;
 mod game_manager;
 mod grape;
 mod menu;
+mod obstacles;
 mod player;
 
 struct GodotJoyrideExtension;

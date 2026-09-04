@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dqaugckj6pcg4"]
 
 [ext_resource type="Texture2D" uid="uid://byluasg852cij" path="res://assets/sprites/Grapes_spritesheet.png" id="1_422x0"]
+[ext_resource type="AudioStream" uid="uid://dhqqmyn3xkxhg" path="res://assets/Audio/Effects/Munch.wav" id="2_elxb2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_slkoe"]
 radius = 8.0
@@ -48,13 +49,16 @@ animations = [{
 "speed": 7.0
 }]
 
-[node name="Grapes" type="Grapes" unique_id=1087710389]
+[node name="Grapes" type="Grapes" unique_id=1087710389 groups=["Tokens"]]
 scale = Vector2(3, 3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=262354490]
 shape = SubResource("CircleShape2D_slkoe")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=894861300]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=894861300 groups=["Tokens"]]
 sprite_frames = SubResource("SpriteFrames_slkoe")
+
+[node name="PickupSounds" type="AudioStreamPlayer2D" parent="." unique_id=100717509]
+stream = ExtResource("2_elxb2")
 
 [connection signal="body_entered" from="." to="." method="on_body_entered"]

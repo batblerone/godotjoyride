@@ -1,3 +1,9 @@
 [gd_scene format=3 uid="uid://dbt7fdv4ym6tg"]
 
-[node name="ObstacleSpawn" type="Node2D" unique_id=2045740476]
+[ext_resource type="PackedScene" uid="uid://byujh8ndp0hek" path="res://scenes/tree_branch.tscn" id="1_lrh8s"]
+[ext_resource type="PackedScene" uid="uid://dwiqa5abig5s4" path="res://scenes/owl.tscn" id="2_nipr5"]
+
+[node name="ObstacleSpawn" type="ObstacleSpawn" unique_id=2126493093]
+obstacle_scene_path = Array[PackedScene]([ExtResource("1_lrh8s"), ExtResource("2_nipr5")])
+
+[node name="Timer" type="Timer" parent="." unique_id=1211002676]

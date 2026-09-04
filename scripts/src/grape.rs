@@ -1,6 +1,6 @@
 use crate::game_manager::*;
 use crate::player::*;
-use godot::classes::{AnimatedSprite2D, Area2D, IArea2D, Node2D, Timer};
+use godot::classes::{AnimatedSprite2D, Area2D, AudioStreamPlayer2D, IArea2D, Node2D, Timer};
 use godot::global::randf_range;
 use godot::prelude::*;
 
@@ -12,6 +12,7 @@ pub struct Grapes {
     fly_speed: f32,
     is_visible: bool,
     animation_player: Option<Gd<AnimatedSprite2D>>,
+    pickup_sound: Option<Gd<AudioStreamPlayer2D>>,
 
     base: Base<Area2D>,
 }
@@ -29,6 +30,9 @@ pub struct GrapeSpawn {
     base: Base<Node2D>,
 }
 
+// ====================================
+// Handle Grapes
+// ====================================
 #[godot_api]
 impl IArea2D for Grapes {
     fn init(base: Base<Area2D>) -> Self {
@@ -36,6 +40,7 @@ impl IArea2D for Grapes {
             fly_speed: -5.0,
             is_visible: true,
             animation_player: None,
+            pickup_sound: None,
             base,
         }
     }
@@ -52,6 +57,11 @@ impl IArea2D for Grapes {
             godot_print!("Warning: AnimationPlayer node not found at root.");
         }
 
+        self.pickup_sound = Some(
+            self.base()
+                .get_node_as::<AudioStreamPlayer2D>("PickupSounds"),
+        );
+
         self.is_visible = true;
     }
 
@@ -64,49 +74,6 @@ impl IArea2D for Grapes {
         let movement = Vector2::new(self.fly_speed, 0.0) * delta as f32 * 80.0;
         let mut grape = self.base_mut();
         grape.translate(movement);
-    }
-}
-
-#[godot_api]
-impl INode2D for GrapeSpawn {
-    fn init(base: Base<Node2D>) -> Self {
-        Self {
-            spawn_interval: 2.5,
-            grape_scene_path: None,
-            player_node: None,
-            timer: None,
-            base,
-        }
-    }
-
-    fn ready(&mut self) {
-        // Find player node
-        if let Some(player_node) = self.base().get_node_or_null("../Player") {
-            let player_gd: Gd<Player> = player_node.cast::<Player>();
-
-            let player_struct = player_gd.bind();
-
-            if player_struct.is_dead {
-                return;
-            }
-        }
-
-        // Start a timer
-        let mut timer = Timer::new_alloc();
-
-        // Wire up a timer timeout signal
-        timer.connect("timeout", &self.base().callable("on_timer_timeout"));
-
-        timer.set_wait_time(self.spawn_interval);
-        timer.set_autostart(true);
-
-        // Now add this all into our scene
-        {
-            let mut base = self.base_mut();
-            base.add_child(&timer);
-        }
-
-        self.timer = Some(timer);
     }
 }
 
@@ -125,8 +92,54 @@ impl Grapes {
             } else {
                 godot_warn!("GameManager not an Autoload!");
             }
-            self.base_mut().queue_free();
+
+            if let Some(pickuped) = self.pickup_sound.as_mut() {
+                pickuped.play();
+            }
+
+            self.base_mut().set_visible(false);
         }
+    }
+}
+
+// ===================================
+// Spawning Grapes
+// ===================================
+
+#[godot_api]
+impl INode2D for GrapeSpawn {
+    fn init(base: Base<Node2D>) -> Self {
+        Self {
+            spawn_interval: 4.0,
+            grape_scene_path: None,
+            player_node: None,
+            timer: None,
+            base,
+        }
+    }
+
+    fn ready(&mut self) {
+        // Find player node
+        if let Some(player) = self.base().try_get_node_as::<Player>("../Player") {
+            self.player_node = Some(player);
+        } else {
+            godot_error!("ObstacleSpawn: No Player found at ../Player");
+        }
+
+        // start a timer
+        let mut timer = Timer::new_alloc();
+
+        // wire in timer timout signal
+        timer.connect("timeout", &self.base().callable("on_timer_timeout"));
+
+        // Set random spawn references
+        let random_spawn = randf_range(0.5, self.spawn_interval); // spawns anywhere from 0.5 upto max spawn interval
+        timer.set_wait_time(random_spawn);
+        timer.set_autostart(true);
+
+        // add it to our scene
+        self.base_mut().add_child(&timer);
+        self.timer = Some(timer);
     }
 }
 
@@ -138,9 +151,9 @@ impl GrapeSpawn {
     }
 
     fn spawn_grapes(&mut self) {
-        // Check the players dead status
+        // Check if player is dead
         if let Some(ref player) = self.player_node {
-            if player.get("is_dead").to::<bool>() {
+            if player.bind().is_dead {
                 return;
             }
         }
@@ -155,18 +168,22 @@ impl GrapeSpawn {
         let Some(grape_instance) = grape_scene.instantiate() else {
             return;
         };
-        let mut grape_area = grape_instance.cast::<Grapes>();
 
-        // DEBUG: Spawn grapes check.
-        // let grape_name = grape_area.get_name();
-        // godot_print!("Spawned {}", grape_name);
+        if let Ok(mut grapes_area) = grape_instance.try_cast::<Area2D>() {
+            // random position for y spawn
+            const MAX_SPAWN_Y: f64 = 275.0;
+            let random_y = randf_range(-MAX_SPAWN_Y + 25.0, MAX_SPAWN_Y - 25.0) as f32;
 
-        self.base_mut().add_child(&grape_area);
+            grapes_area.set_position(Vector2::new(0.0, random_y));
+            self.base_mut().add_child(&grapes_area);
+        } else {
+            godot_error!("Instantiated grape scene root does not inherit from Area2D!");
+        }
 
-        // random position for y spawn
-        const MAX_SPAWN_Y: f64 = 275.0;
-        let random_y = randf_range(-MAX_SPAWN_Y + 25.0, MAX_SPAWN_Y - 25.0) as f32;
-
-        grape_area.set_position(Vector2::new(0.0, random_y));
+        // Reset our timer
+        if let Some(mut timer) = self.timer.clone() {
+            let random_spawn = randf_range(0.5, self.spawn_interval);
+            timer.set_wait_time(random_spawn);
+        }
     }
 }

@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://q0gyr60qlu0h"
-path="res://.godot/imported/dying.wav-5084354770b6f4e8f721ed9e099dba08.sample"
+uid="uid://dhqqmyn3xkxhg"
+path="res://.godot/imported/Munch.wav-d38a2e0481694d3bf359607fdc85dc28.sample"
 
 [deps]
 
-source_file="res://assets/Audio/Effects/dying.wav"
-dest_files=["res://.godot/imported/dying.wav-5084354770b6f4e8f721ed9e099dba08.sample"]
+source_file="res://assets/Audio/Effects/Munch.wav"
+dest_files=["res://.godot/imported/Munch.wav-d38a2e0481694d3bf359607fdc85dc28.sample"]
 
 [params]
 

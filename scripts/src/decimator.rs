@@ -17,12 +17,12 @@ impl IArea2D for DespawnArea {
 #[godot_api]
 impl DespawnArea {
     #[func]
-    // This isn't despawning things, probably cause I am calling area2d, 
-    // and not making a universl despawn for my custom nodes.
-    fn destroy_entity(&mut self, area: Gd<Area2D>) {
+    // When a Node2D enters the area, it is despawned if in corresponding groups.
+    fn destroy_entity(&mut self, area: Gd<Node2D>) {
         if area.is_in_group("Obstacles") || area.is_in_group("Tokens") {
-            let entity_name = area.get_name();
-            godot_print!("Despawned {}", entity_name);
+            // DEBUG: Show which entities despawned.
+            // let entity_name = area.get_name();
+            // godot_print!("Despawned {}", entity_name);
             let mut entity = area;
             entity.queue_free();
         }

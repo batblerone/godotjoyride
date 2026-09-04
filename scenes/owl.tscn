@@ -5,7 +5,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_slkoe"]
 radius = 8.0
 
-[node name="HornedOwl" type="CharacterBody2D" unique_id=1473036286]
+[node name="HornedOwl" type="Owls" unique_id=122723146]
 scale = Vector2(4, 4)
 metadata/_edit_group_ = true
 
@@ -13,7 +13,6 @@ metadata/_edit_group_ = true
 position = Vector2(2, -2)
 sprite_frames = ExtResource("1_a0qig")
 animation = &"idle"
-frame_progress = 0.633726
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1231535912]
 shape = SubResource("CircleShape2D_slkoe")

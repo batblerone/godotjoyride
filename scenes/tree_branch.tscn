@@ -24,7 +24,7 @@ size = Vector2(16, 16)
 atlas = ExtResource("1_ar2yf")
 region = Rect2(16, 0, 16, 16)
 
-[node name="TreeBranch" type="Area2D" unique_id=1510409778 groups=["Obstacles"]]
+[node name="TreeBranch" type="TreeBranch" unique_id=520666968 groups=["Obstacles"]]
 scale = Vector2(4, 4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2103058457]

@@ -6,7 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://dgkpak7tgfm4o" path="res://scenes/player.tscn" id="3_lnu2h"]
 [ext_resource type="FontFile" uid="uid://dmmttscnqais5" path="res://assets/fonts/EBGaramond-VariableFont_wght.ttf" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://dqaugckj6pcg4" path="res://scenes/grapes.tscn" id="5_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://dbt7fdv4ym6tg" path="res://scenes/obstacle_spawn.tscn" id="6_gee14"]
 [ext_resource type="Texture2D" uid="uid://byluasg852cij" path="res://assets/sprites/Grapes_spritesheet.png" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://dwiqa5abig5s4" path="res://scenes/owl.tscn" id="7_vtaks"]
+[ext_resource type="PackedScene" uid="uid://byujh8ndp0hek" path="res://scenes/tree_branch.tscn" id="8_kvpfn"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
 
@@ -50,7 +53,7 @@ rotation = 3.1415927
 shape = SubResource("WorldBoundaryShape2D_yqjtg")
 
 [node name="Decimator" parent="." unique_id=843045323 instance=ExtResource("2_yqjtg")]
-position = Vector2(-592, 0)
+position = Vector2(-768, 0)
 
 [node name="Player" parent="." unique_id=207546028 instance=ExtResource("3_lnu2h")]
 position = Vector2(-384, 256)
@@ -58,6 +61,10 @@ position = Vector2(-384, 256)
 [node name="GrapeSpawn" parent="." unique_id=1168566793 groups=["Tokens"] instance=ExtResource("1_p57ef")]
 grape_scene_path = ExtResource("5_u5sy4")
 position = Vector2(896, 0)
+
+[node name="ObstacleSpawn" parent="." unique_id=2045740476 groups=["Obstacles"] instance=ExtResource("6_gee14")]
+obstacle_scene_path = Array[PackedScene]([ExtResource("7_vtaks"), ExtResource("8_kvpfn")])
+position = Vector2(1088, 0)
 
 [node name="HUD" type="Control" parent="." unique_id=2042041132]
 layout_mode = 3
@@ -125,15 +132,20 @@ scale = Vector2(3, 3)
 texture = SubResource("AtlasTexture_p57ef")
 
 [node name="GameOver" type="Label" parent="HUD" unique_id=1472274005]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 56.0
-offset_top = 16.0
-offset_right = 56.0
-offset_bottom = 16.0
+offset_left = -312.0
+offset_top = -24.0
+offset_right = 416.0
+offset_bottom = 72.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 180
+text = "Game Over!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="area_entered" from="Decimator" to="Decimator" method="destroy_entity"]

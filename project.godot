@@ -39,6 +39,7 @@ movie_writer/movie_file="/home/justin/Documents/Gamedev/godotjoyride/export/test
 
 Obstacles=""
 Tokens=""
+Player=""
 
 [input]
 

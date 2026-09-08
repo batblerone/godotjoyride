@@ -5,7 +5,10 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_slkoe"]
 radius = 32.0
 
-[node name="Player" type="Player" unique_id=243765913]
+[sub_resource type="CircleShape2D" id="CircleShape2D_anp1u"]
+radius = 32.984844
+
+[node name="Player" type="Player" unique_id=243765913 groups=["Player"]]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2019716860]
 scale = Vector2(4, 4)
@@ -14,3 +17,10 @@ animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=29727741]
 shape = SubResource("CircleShape2D_slkoe")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1521643763]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1327933410]
+shape = SubResource("CircleShape2D_anp1u")
+
+[connection signal="area_entered" from="Area2D" to="." method="on_obstacles_entered"]

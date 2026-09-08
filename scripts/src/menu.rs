@@ -15,6 +15,7 @@ pub enum MenuState {
     Main,
     Settings,
     Credits,
+    GameOver,
 }
 
 #[godot_api]
@@ -76,6 +77,9 @@ impl MenuLayer {
         let credits_menu = self
             .base()
             .try_get_node_as::<VBoxContainer>("ButtonContainer/CreditsMenu");
+        let game_over = self
+            .base()
+            .try_get_node_as::<VBoxContainer>("ButtonContainer/GameOver");
 
         // Adjust the visibility
         if let Some(mut main) = main_menu {
@@ -88,6 +92,10 @@ impl MenuLayer {
 
         if let Some(mut credits) = credits_menu {
             credits.set_visible(self.current_state == MenuState::Credits);
+        }
+
+        if let Some(mut end_game) = game_over {
+            end_game.set_visible(self.current_state == MenuState::GameOver);
         }
     }
 
@@ -103,6 +111,10 @@ impl MenuLayer {
     #[func]
     fn show_credits(&mut self) {
         self.switch_to_menu(MenuState::Credits);
+    }
+    #[func]
+    fn show_game_over(&mut self) {
+        self.switch_to_menu(MenuState::GameOver);
     }
 
     #[func]

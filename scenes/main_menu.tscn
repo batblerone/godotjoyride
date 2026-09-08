@@ -46,7 +46,7 @@ stretch_mode = 1
 [node name="Label" type="Label" parent="." unique_id=772332693]
 offset_right = 1280.0
 offset_bottom = 256.0
-text = "Fly away!"
+text = "Fly Away, Fly!"
 label_settings = SubResource("LabelSettings_slkoe")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -80,6 +80,35 @@ text = "Credits
 "
 
 [node name="Exit" type="Button" parent="ButtonContainer/MainMenu" unique_id=581577826]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_con2f")
+theme_override_font_sizes/font_size = 40
+text = "Exit
+"
+
+[node name="GameOver" type="VBoxContainer" parent="ButtonContainer" unique_id=1464977410]
+custom_minimum_size = Vector2(353, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Play" type="Button" parent="ButtonContainer/GameOver" unique_id=834784110]
+layout_mode = 2
+text = "Restart?"
+
+[node name="Settings" type="Button" parent="ButtonContainer/GameOver" unique_id=1493772996]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_con2f")
+theme_override_font_sizes/font_size = 40
+text = "Settings"
+
+[node name="Credits" type="Button" parent="ButtonContainer/GameOver" unique_id=1823476554]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_con2f")
+theme_override_font_sizes/font_size = 40
+text = "Credits
+"
+
+[node name="Exit" type="Button" parent="ButtonContainer/GameOver" unique_id=755948420]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_con2f")
 theme_override_font_sizes/font_size = 40
@@ -158,6 +187,10 @@ text = "Back
 [connection signal="pressed" from="ButtonContainer/MainMenu/Settings" to="." method="show_settings"]
 [connection signal="pressed" from="ButtonContainer/MainMenu/Credits" to="." method="show_credits"]
 [connection signal="pressed" from="ButtonContainer/MainMenu/Exit" to="." method="on_exit_pressed"]
+[connection signal="pressed" from="ButtonContainer/GameOver/Play" to="." method="on_play_pressed"]
+[connection signal="pressed" from="ButtonContainer/GameOver/Settings" to="." method="show_settings"]
+[connection signal="pressed" from="ButtonContainer/GameOver/Credits" to="." method="show_credits"]
+[connection signal="pressed" from="ButtonContainer/GameOver/Exit" to="." method="on_exit_pressed"]
 [connection signal="value_changed" from="ButtonContainer/SettingsMenu/VolumeSlider" to="." method="on_slider_changed"]
 [connection signal="pressed" from="ButtonContainer/SettingsMenu/Back" to="." method="show_main"]
 [connection signal="pressed" from="ButtonContainer/CreditsMenu/Back" to="." method="show_main"]

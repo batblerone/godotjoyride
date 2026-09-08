@@ -1,4 +1,5 @@
-use godot::classes::{AnimatedSprite2D, CharacterBody2D, ICharacterBody2D, Input};
+use crate::game_manager::*;
+use godot::classes::{AnimatedSprite2D, Area2D, CharacterBody2D, ICharacterBody2D, Input};
 use godot::prelude::*;
 
 #[derive(GodotClass)]
@@ -100,5 +101,56 @@ impl ICharacterBody2D for Player {
         animate_sprite.play_ex().name(animation_name).done();
 
         self.was_flying = is_flying_pressed;
+
+        let base = self.base_mut();
+        // Loop through everything the character physically collided with during this frame
+        for i in 0..base.get_slide_collision_count() {
+            if let Some(collision) = base.get_slide_collision(i) {
+                if let Some(collider) = collision.get_collider() {
+                    // Check if the solid obstacle is a CharacterBody2D
+                    if let Ok(obstacle_body) = collider.try_cast::<CharacterBody2D>() {
+                        godot_print!(
+                            "Collided with a solid CharacterBody2D obstacle: {:?}",
+                            obstacle_body.get_name()
+                        );
+                        // Drop mutable borrow of base to safely call self methods
+                        drop(base);
+                        self.player_died();
+                        return;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#[godot_api]
+impl Player {
+    #[func]
+    fn player_died(&mut self) {
+        if self.is_dead {
+            return;
+        }
+
+        let Some(mut game_manager_node) = self
+            .base()
+            .try_get_node_as::<GameManager>("/root/GameManagerGlobal")
+        else {
+            godot_error!("GameManagerGlobal not found in Autoload.");
+            return;
+        };
+
+        self.is_dead = true;
+
+        let mut game_manager = game_manager_node.bind_mut();
+        game_manager.game_over();
+    }
+
+    // A method for killing player when body is entered
+    #[func]
+    fn on_obstacles_entered(&mut self, area: Gd<Area2D>) {
+        if area.is_in_group("Player") {
+            self.player_died();
+        }
     }
 }

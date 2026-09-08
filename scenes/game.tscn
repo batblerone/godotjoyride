@@ -131,21 +131,4 @@ position = Vector2(-32, 16)
 scale = Vector2(3, 3)
 texture = SubResource("AtlasTexture_p57ef")
 
-[node name="GameOver" type="Label" parent="HUD" unique_id=1472274005]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -312.0
-offset_top = -24.0
-offset_right = 416.0
-offset_bottom = 72.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 180
-text = "Game Over!"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [connection signal="area_entered" from="Decimator" to="Decimator" method="destroy_entity"]

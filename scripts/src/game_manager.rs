@@ -18,9 +18,10 @@ pub struct GameManager {
     high_score: i32,
 
     // State management for menues or game
-    current_game_state: GameState,
+    pub current_game_state: GameState,
     pub music_volume: f32,
     pause_menu_instance: Option<Gd<Node>>,
+    end_game_instance: Option<Gd<Node>>,
 
     // UI Interaction for save and game
     #[export]
@@ -52,7 +53,7 @@ pub enum GameState {
     PlayState,
     TitleState,
     PauseState,
-    _PlayerDead,
+    PlayerDead,
 }
 
 #[godot_api]
@@ -73,6 +74,7 @@ impl INode for GameManager {
             game_music: None,
             menu_music: None,
             pause_menu_instance: None,
+            end_game_instance: None,
             base,
         }
     }
@@ -113,9 +115,8 @@ impl INode for GameManager {
                 GameState::TitleState => {
                     // This is just blank
                 }
-                _ => {
-                    todo!()
-                    // Need to add in a game over overlay, subset of the menu scene?
+                GameState::PlayerDead => {
+                    // Just blank, player shouldn't die when hitting menu
                 }
             }
             return;
@@ -178,7 +179,9 @@ impl GameManager {
                     tree.change_scene_to_file("res://scenes/main_menu.tscn");
                 }
             }
-            _ => {}
+            GameState::PlayerDead => {
+                self.game_over();
+            }
         }
     }
 
@@ -233,6 +236,42 @@ impl GameManager {
     }
 
     #[func]
+    pub fn game_over(&mut self) {
+        self.is_tracking_score = false;
+        self.play_menu_music();
+
+        // Freeze game engine node processing
+        if let Some(mut tree) = self.base().get_tree().into() {
+            tree.set_pause(true);
+        }
+
+        // Load and instantiate the end game scene as an overlay
+        let mut loader = ResourceLoader::singleton();
+        if let Some(res) = loader.load("res://scenes/main_menu.tscn") {
+            if let Ok(packed_scene) = res.try_cast::<PackedScene>() {
+                if let Some(overlay) = packed_scene.instantiate() {
+                    if let Some(mut background) =
+                        overlay.try_get_node_as::<TextureRect>("Background")
+                    {
+                        background.set_visible(false);
+                    }
+
+                    // Cache the reference so resume_game can queue_free()
+                    self.end_game_instance = Some(overlay.clone());
+
+                    // Attaching overlay to scene
+                    if let Some(tree) = self.base().get_tree().into() {
+                        if let Some(mut current_scene) = tree.get_current_scene() {
+                            current_scene.call_deferred("add_child", &[overlay.to_variant()]);
+                            self.end_game_instance = Some(overlay);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #[func]
     pub fn change_to_play_state(&mut self) {
         self.switch_gamestate(GameState::PlayState);
     }
@@ -240,6 +279,11 @@ impl GameManager {
     #[func]
     pub fn change_to_menu_state(&mut self) {
         self.switch_gamestate(GameState::TitleState);
+    }
+
+    #[func]
+    pub fn change_to_dead_state(&mut self) {
+        self.switch_gamestate(GameState::PlayerDead);
     }
 
     #[func]

@@ -31,9 +31,9 @@ Button/fonts/font = ExtResource("3_con2f")
 
 [sub_resource type="LabelSettings" id="LabelSettings_anp1u"]
 font = ExtResource("3_con2f")
-font_size = 100
+font_size = 40
 
-[node name="MenuControl" type="MenuLayer" unique_id=401258770]
+[node name="MenuControl" type="MenuLayer" unique_id=356120957]
 process_mode = 3
 
 [node name="Background" type="TextureRect" parent="." unique_id=1320489102]
@@ -178,7 +178,8 @@ theme_override_constants/separation = 10
 [node name="Label" type="Label" parent="ButtonContainer/CreditsMenu" unique_id=1543569]
 custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
-text = "A Game by Silly Crow Studios"
+text = "A Game by Silly Crow Studios
+Music by FarBeyond Studio (https://farbeyond-studio.carrd.co/)"
 label_settings = SubResource("LabelSettings_anp1u")
 horizontal_alignment = 1
 autowrap_mode = 2

@@ -1,6 +1,6 @@
 use crate::game_manager::*;
 use godot::classes::window::Mode;
-use godot::classes::{AudioServer, CanvasLayer, HSlider, ICanvasLayer, VBoxContainer};
+use godot::classes::{AudioServer, CanvasLayer, HSlider, ICanvasLayer, Label, VBoxContainer};
 use godot::prelude::*;
 
 #[derive(GodotClass)]
@@ -67,7 +67,7 @@ impl MenuLayer {
         // Switch the state for menu lookups.
         self.current_state = new_state;
 
-        // Get the nodes for the menus
+        // Get the nodes for the menus and labels
         let main_menu = self
             .base()
             .try_get_node_as::<VBoxContainer>("ButtonContainer/MainMenu");
@@ -80,6 +80,8 @@ impl MenuLayer {
         let game_over = self
             .base()
             .try_get_node_as::<VBoxContainer>("ButtonContainer/GameOver");
+        let game_label = self.base().try_get_node_as::<Label>("GameLabel");
+        let game_over_label = self.base().try_get_node_as::<Label>("GameOverLabel");
 
         // Adjust the visibility
         if let Some(mut main) = main_menu {
@@ -96,6 +98,15 @@ impl MenuLayer {
 
         if let Some(mut end_game) = game_over {
             end_game.set_visible(self.current_state == MenuState::GameOver);
+        }
+
+        // Swap the header label depending on state
+        if let Some(mut label) = game_label {
+            label.set_visible(self.current_state != MenuState::GameOver);
+        }
+
+        if let Some(mut label) = game_over_label {
+            label.set_visible(self.current_state == MenuState::GameOver);
         }
     }
 

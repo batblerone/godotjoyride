@@ -153,4 +153,17 @@ impl Player {
             self.player_died();
         }
     }
+    
+    // A method for reseting dead players
+    #[func]
+    fn reset_player_after_load(&mut self) {
+        let tree = self.base().get_tree();
+        if let Some(current_scene) = tree.get_current_scene() {
+            if let Some(mut player_node) = current_scene.try_get_node_as::<Player>("Player") {
+                player_node.bind_mut().is_dead = false;
+            } else {
+                godot_error!("Player node not found in new scene.");
+            }
+        }
+    }
 }

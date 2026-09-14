@@ -43,10 +43,19 @@ offset_bottom = 720.0
 texture = ExtResource("2_con2f")
 stretch_mode = 1
 
-[node name="Label" type="Label" parent="." unique_id=772332693]
+[node name="GameLabel" type="Label" parent="." unique_id=772332693]
 offset_right = 1280.0
 offset_bottom = 256.0
 text = "Fly Away, Fly!"
+label_settings = SubResource("LabelSettings_slkoe")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameOverLabel" type="Label" parent="." unique_id=1217668057]
+visible = false
+offset_right = 1280.0
+offset_bottom = 256.0
+text = "You crashed, again?"
 label_settings = SubResource("LabelSettings_slkoe")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -87,6 +96,7 @@ text = "Exit
 "
 
 [node name="GameOver" type="VBoxContainer" parent="ButtonContainer" unique_id=1464977410]
+visible = false
 custom_minimum_size = Vector2(353, 0)
 layout_mode = 2
 theme_override_constants/separation = 10

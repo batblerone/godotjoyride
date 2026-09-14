@@ -147,6 +147,10 @@ impl GameManager {
 
         match new_state {
             GameState::PlayState => {
+                // an unconditional unpause, cause you never know
+                let mut tree = self.base().get_tree();
+                tree.set_pause(false);
+
                 if old_state == GameState::PauseState {
                     self.resume_game();
                 } else {

@@ -23,3 +23,5 @@ scripts/target
 # Godot 4+ specific ignores
 .godot/
 /android/
+export/
+export_presets.cfg
